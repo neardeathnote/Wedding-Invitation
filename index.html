@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Undangan Pernikahan Darus & Marifah</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: url('background.jpg') no-repeat center center fixed;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+            color: white;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        h1 {
+            color: #f8c8dc;
+        }
+        .guest {
+            font-size: 18px;
+            font-weight: bold;
+            color: #f1f1f1;
+        }
+        .countdown {
+            font-size: 24px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Undangan Pernikahan</h1>
+        <h2>Darus & Marifah</h2>
+        <p>Dengan penuh kebahagiaan, kami mengundang Anda untuk menghadiri pernikahan kami.</p>
+        <p class="guest">Untuk: <span id="guestName">Tamu</span></p>
+        <p class="countdown" id="countdown"></p>
+    </div>
+
+    <script>
+        function getQueryParameter(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+        
+        const guest = getQueryParameter('to');
+        if (guest) {
+            document.getElementById('guestName').textContent = decodeURIComponent(guest);
+        }
+        
+        function updateCountdown() {
+            const weddingDate = new Date('2025-06-15T00:00:00');
+            const now = new Date();
+            const timeDiff = weddingDate - now;
+            
+            const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+            
+            document.getElementById('countdown').textContent = `${days} Hari, ${hours} Jam, ${minutes} Menit, ${seconds} Detik`;
+        }
+        
+        setInterval(updateCountdown, 1000);
+    </script>
+</body>
+</html>
